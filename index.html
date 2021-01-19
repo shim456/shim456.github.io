@@ -1,2 +1,407 @@
-Hello world!!!
-Testing Directory walk rescuresively.
+<!--以下を入れるとexp1等のインデントが働かない？？？
+<!DOCTYPE html>
+多分styleの記述にエラーがある？？？-->
+<html>
+<head>
+<meta charset="UTF-8">
+<!--　画像拡大表示 lightbox2 -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js" type="text/javascript"></script>
+
+<style type="text/css">
+h4 { background-color:lightgreen;
+}
+.exp1 { margin-left:30;
+		font-weight:bold;
+		color:black;
+		background-color:white;
+}
+.exp2 { margin-left:30;
+		font-weight:bold;
+		color:black;
+		background-color:white;
+}
+
+.cell1 { margin-left:20;
+		display: table-cell;
+		width: 250;
+}
+.index { /* margin-left:30; */
+		font-weight:bold;
+		background-color:lightblue;
+		color:black;
+}
+.index2 { margin-left:30;
+		font-weight:bold;
+		color:black;
+}
+
+.MyTable {
+/*  margin:0px 30px; */
+  display:table;
+/*  width:480px; */
+}
+
+.MyTable div.row{
+  display:table-row;
+}
+
+.MyTable div.title{
+  display:table-cell;
+  border: 1px solid lightblue;
+/*
+  background-color: blue;
+*/
+  background-color: purple;
+
+  color:white
+
+}
+
+.MyTable div.cell{
+  display:table-cell;
+  border: 1px solid lightblue;
+
+}
+
+.MyTable div.cellg{
+  display:table-cell;
+  background-color: lightgreen;
+  border: 1px solid lightblue;
+
+}
+
+.MyTable div.cellp{
+  background-color: lightpink;
+  display:table-cell;
+  border: 1px solid lightblue;
+
+}
+.MyTable div.cellb{
+  background-color: lightblue;
+  display:table-cell;
+  border: 1px solid lightblue;
+}
+
+
+</style>
+
+<script>
+function loadWordPress() {
+	alert("こんにちは！");
+}
+</script>
+
+
+<title>C言語-再帰処理、GitHubに挑戦</title>
+</head>
+<body>
+
+
+    <div class=index>
+	★C言語-再帰処理、GitHubに挑戦★<span style=background-color:black;color:white>[2021/01/19更新]</span><br/>
+	<a href=#clang class=index2>C言語、再起処理</a><br/>
+	<a href=#git class=index2>Gitについて</a><br/>
+	<a href=#github class=index2>GitHub操作</a><br/>
+
+    </div>
+数十年ぶりに、C言語、しかも再帰処理だ、一般化を試みた<br/>
+また序に、Git/GitHubにも挑戦した(昔は、CVS/Subversionが主流だったが)<br/>
+
+<a name=clang />
+<h4>C言語、再起処理</h4>
+<div class=exp1>
+	○契機について<br/>
+	<div class=exp2>
+		山田様がsendmlにて、苦労していた、SUIDを使用すれば、上手くいきそうなのだが、よく調べたら、SUIDはシェルでは働かない、実行モジュールである必要があるということでC言語で開発<br/>
+		またどうせ作成するならば、苦手にしていた再帰処理を一般化したいと考えた。
+	</div>
+	○開発環境について<br/>
+	<div class=exp2>
+		折角、VirtualBox環境を構築したので、「CentOS6.5DVD1のクローンのNFSサーバ」を使用した<br/>
+		Copy&Paste環境ではないので、TeraTermを使用して開発することにした<br/>
+		TeraTermで「192.168.56.111」に接続する、shim123/shim123123でログイン<br/>
+		ディレクトリは、「/home/shim123/dir_walk」配下<br/>
+		なおGitHubのリモートリポジトリは「https://github.com/shim456/dir_walk.git」<br/>
+	</div>
+	○プログラムの概要<br/>
+	<div class=exp2>
+		詳細は省くが、前半(walk_dir)、後半(do_actio)に分けた<br/>
+		前半は、ディレクトリを再帰的歩き回り、ディレクトリ/ファイルを収集する。<br/>
+		中半は収集した情報のソート等を行う<br/>
+		後半は、必要な処理を行う：lsならば順ソートご一覧出力する、chown/chmodならば逆順ソート後、実施等・・・<br/>
+
+	</div>
+
+</div>
+
+
+<a name=git />
+<h4>Gitについて</h4>
+<div class=exp1>
+◯Git/GitHUBについて
+	<div class=exp1>
+		gitはバージョン管理用のCUIベースコマンドで、ローカルリポジトリ操作が主体<br/>
+		GitHubはGUIベースで、リモートリポジトリ操作が可能だ<br/>
+		一人で開発するならば、gitだけで十分だが、複数人で開発するにはGitHubが必要だ<br/>
+	</div>
+<br/>
+◯gitコマンドの操作例
+	<div class=exp1>
+	◯既存のファイル群をリモートリポジトリに登録する(作成後)<br/>
+	◯その後、別ディレクトリでリモートからローカルに展開する<br/>
+	以下の①～③の操作で行うことができる。<br/>
+	<br/>
+
+①リモートリポジトリを新規に作成する<br/>
+<div class=exp1>
+	◯https://github.com/にアクセス<br/>
+	◯左上の「New」を押下<br/>
+	◯RepositoryNameに名前を登録<br/>
+	◯選択は既定通り、「Public」<br/>
+	◯選択は既定通り、以下の３項目にチェックを入れない<br/>
+		□Add a README file<br/>
+		□Add .gitignore<br/>
+		□Choose a license<br/>
+	◯「CreateRepository」を押下<br/>
+	※作成したリポジトリは以下となる<br/>
+	※	https://github.com/shim456/dir_walk.git<br/>
+	※shim456:ユーザ名、dir_walk:リポジトリ名<br/>
+</div>
+②既存のファイル群からリポジトリ作成<br/>
+<div class=exp1>
+	◯リモートリポジトリを新規に作成する。<br/>
+	◯ローカルリポジトリで以下の操作を行う<br/>
+	> cd dir_walk<br/>
+	> git init<br/>
+	> git add *<br/>
+	> git commit -m "コメント"<br/>
+	> git push --set-upstream https://github.com/shim456/dir_walk.git master<br/>
+		※以降ユーザ/パスワードを入力する<br/>
+		※２回目以降は、「git push」だけでOK！<br/>
+</div
+③新規にローカルリポジトリを作成する<br/>
+<div class=exp1>
+	※前提としては、リモートリピポジトリは作成/登録済<br/>
+	◯ローカルリポジトリで以下の操作を行う<br/>
+	> cd dir_walk<br/>
+	> git init<br/>
+	> git clone https://github.com/shim456/dir_walk.git<br/>
+	※この場合は、ユーザ/パスワードは不要<br/>
+</div>
+
+※git pushの操作イメージ<br/>
+<div class=exp1>
+	[shim123@CEntOS6 dir_walk]$ git push<br/>
+	Username for 'https://github.com': shim456<br/>
+	Password for 'https://shim456@github.com':Shim123123<br/>
+	Everything up-to-date<br/>
+	※エラーが表示される場合は「unset SSH_ASKPASS」を実効する<br/>
+</div>
+
+	</div>
+<br/>
+◯GitHub Pagesを使ってWebページを公開
+<div class=exp1>
+無料で使える！GitHub Pagesを使ってWebページを公開する方法<br/>
+https://techacademy.jp/magazine/6445<br/>
+
+下記の流れでWebページを公開していきます。<br/>
+１．GitHub Pages用のリポジトリの作成<br/>
+<div class=exp1>
+
+	GitHubへアクセスし「username.github.io」という名前のリポジトリを作成していきます。<br/>
+	shim456.github.io<br/>
+	※URL：https://github.com/shim456/shim456.github.io.git<br/>
+
+	$ git clone https://github.com/username/username.github.io<br/>
+	git clone https://github.com/shim456/shim456.github.io<br/>
+
+	これでローカル環境にレポジトリがクローンされました。<br/>
+
+	この際、カレントディレクトリに「username.github.io」というディレクトリができているので、そのディレクトリに入ります。<br/>
+
+	$ cd username.github.io<br/>
+	$ cd shim456.github.io<br/>
+
+</div>
+２．ウェブページの作成<br/>
+<div class=exp1>
+
+	http://shim456.github.io<br/>
+
+	$ echo "Hello world" > index.html<br/>
+</div>
+３．GitHubへプッシュ<br/>
+<div class=exp1>
+
+	HTMLファイルが完成したので、リポジトリにコミットします。<br/>
+
+	$ git add --all<br/>
+	$ git commit -m "Initial commit"<br/>
+</div>
+４．GitHub Pagesへアクセスして確認<br/>
+<div class=exp1>
+
+	GitHub Pagesで表示させるために、ローカルでコミットした変更をGitHubへプッシュします。<br/>
+	
+	$ git push -u origin master<br/>
+エラー：<br/>
+error: src refspec master does not match any.<br/>
+error: failed to push some refs to 'https://github.com/shim456/shim456.github.io'<br/>
+		git status		On branch main<br/>
+		git push -u origin main			statusで確認した「main」に変更(masterではなく)<br/>
+</div>
+５．ブラウザで確認<br/>
+<div class=exp1>
+
+	https://shim456.github.io/<br/>
+</div>
+
+</div>
+
+
+
+</div>
+<br/><br/>
+
+
+参考URL:https://www.atmarkit.co.jp/ait/articles/2003/13/news031.html<br/>
+<div class=exp1>
+
+  <div class="MyTable">
+	<div class=row>
+	    <div class=title>Gitコマンド</div>
+    	<div class=title>説明</div>
+    	<div class=title>備考</div>
+  </div>
+   <div class=row>
+	    <div class=cell>git init</div>
+    	<div class=cell>gitローカルリポジトリを作成する<br/>新規にローカルリポジトリを作成</div>
+    	<div class=cell>-</div>
+   </div>
+   <div class=row>
+	    <div class=cell>git add </div>
+    	<div class=cell>変更内容をインデックスに追加してコミット対象にする</div>
+    	<div class=cell>-</div>
+   </div>
+   <div class=row>
+	    <div class=cell>git rm </div>
+    	<div class=cell>ファイルをインデックスから削除する</div>
+    	<div class=cell>-</div>
+   </div>
+   <div class=row>
+	    <div class=cell>git mv </div>
+    	<div class=cell>ファイルやディレクトリの名前を変更する</div>
+    	<div class=cell>-</div>
+   </div>
+   <div class=row>
+	    <div class=cell>git reset </div>
+    	<div class=cell>ファイルをインデックスから削除し、特定のコミットの状態まで戻す</div>
+    	<div class=cell>-</div>
+   </div>
+
+
+
+
+   <div class=row>
+	    <div class=cell>git status </div>
+    	<div class=cell>ワークツリーにあるファイルの状態を表示する</div>
+    	<div class=cell>-</div>
+   </div>
+   <div class=row>
+	    <div class=cell>git show </div>
+    	<div class=cell>ファイルの内容やコミットの差分などを表示する</div>
+    	<div class=cell>-</div>
+   </div>
+   <div class=row>
+	    <div class=cell>git diff </div>
+    	<div class=cell>コミット同士やコミットと作業ツリーの内容を比較する</div>
+    	<div class=cell>-</div>
+   </div>
+
+
+   <div class=row>
+	    <div class=cell>git grep </div>
+    	<div class=cell>リポジトリで管理されているファイルをパターン検索する</div>
+    	<div class=cell>-</div>
+   </div>
+   <div class=row>
+	    <div class=cell>git branch </div>
+    	<div class=cell>ブランチを作成、削除、一覧表示する</div>
+    	<div class=cell>-</div>
+   </div>
+
+
+   <div class=row>
+	    <div class=cell>git commit</div>
+    	<div class=cell>インデックスに追加した変更をリポジトリに記録する</div>
+    	<div class=cell>-</div>
+   </div>
+
+
+
+   <div class=row>
+	    <div class=cell>git clone</div>
+    	<div class=cell>リポジトリのクローンを作成する<br/>git init後に実行する</div>
+    	<div class=cell>-</div>
+   </div>
+   <div class=row>
+	    <div class=cell>git remote</div>
+    	<div class=cell>リモートリポジトリを関連付けする</div>
+    	<div class=cell>-</div>
+   </div>
+   <div class=row>
+	    <div class=cell>git fetch</div>
+    	<div class=cell>リモートリポジトリの内容を取得する</div>
+    	<div class=cell>-</div>
+   </div>
+   <div class=row>
+	    <div class=cell>git pull</div>
+    	<div class=cell>リモートリポジトリの内容を取得し、現在のブランチに取り込む<br/>（「fetch」と「merge」を行う）</div>
+    	<div class=cell>-</div>
+   </div>
+   <div class=row>
+	    <div class=cell>git push</div>
+    	<div class=cell>ローカルリポジトリの変更内容をリモートリポジトリに送信する</div>
+    	<div class=cell>-</div>
+   </div>
+
+</div>
+</div>
+
+<br/><br/>
+
+
+<a name=github />
+<h4>GitHub操作</h4>
+<div class=exp1>
+◯新規にリモートリポジトリを作成する<br/>
+	https://github.com/からアクセスします。<br/>
+
+<br/>
+<a href="github01.png" data-lightbox="abc" data-title="拡大">
+<img src="github01.png" width="200" height="200" style="float:left"></img>
+</a>
+<a href="github02.png" data-lightbox="abc" data-title="拡大">
+<img src="github02.png" width="200" height="200" style="float:left"></img>
+</a>
+<a href="github03.png" data-lightbox="abc" data-title="拡大">
+<img src="github03.png" width="200" height="200" style="float:left"></img>
+</a>
+<a href="github04.png" data-lightbox="abc" data-title="拡大">
+<img src="github04.png" width="200" height="200" style="float:left"></img>
+</a>
+
+<p style="clear: both;"></p>
+
+
+<br/>
+◯リポジトリの削除：<br/>
+	該当リポジトリを表示して、右上の「Settings」をクリック、表示された画面の<br/>
+	最後に表示される「DangerZone」「DeleteThisRepository」をクリック！！！<br/>
+</div>
+
+</body>
+</html>
